@@ -3,8 +3,9 @@ import mongoose from 'mongoose'
 const MONGODB_URI = process.env.MONGODB_URI
 
 const isDev = process.env.NODE_ENV === 'development';
+const isCi = !!process.env.CI
 
-if (!isDev && !MONGODB_URI) {
+if (!isCi && !MONGODB_URI) {
   throw new Error(
     'Please define the MONGODB_URI environment variable'
   )
