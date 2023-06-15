@@ -1,8 +1,105 @@
+"use client"; // This is a client component 👈🏽
+
+import { useState } from 'react';
 import Image from 'next/image'
 
+import { SelectHTMLAttributes } from 'react';
+import Select, {StylesConfig}  from 'react-select'; // Import the Select component from your component library
+import React from 'react';
+
 export default function Home() {
+
+  type Option = {
+    value:string;
+    label:string;
+  }
+
+  interface MDSDataTableSimpleProps {
+    data: Array<{
+      name: string;
+      price: number;
+      location: string;
+    }>;
+  }
+  
+
+  const connectToDB :string = 'http://localhost:4000/get_db'
+  const satellites = [
+    {value: "satellite 1", label: "satellite 1"},
+    {value: "satellite 2", label: "satellite 2"},
+    {value: "satellite 3", label: "satellite 3"}
+
+  ];
+
+  const [rawSateliteResponse, setrawSateliteResponse] = useState<any>(null);
+  const [satelliteData, setSatelliteData] = useState<{ location: string; price: number } | null>(null);
+
+  const [selectedSatellite, setSelectedSatellite] = useState<Option | null>(null);
+
+  const handleSatelliteChange = (event: Option | null) => {
+    setSelectedSatellite(event);
+  };
+
+  const handleSubmit = async () => {
+    console.log("submit");
+    console.log(selectedSatellite);
+    if (selectedSatellite != null) {
+      fetch(connectToDB, {
+        method: 'POST',
+        headers: {
+          'Content-Type':'application/json'
+        },
+        body: JSON.stringify({
+          satellite: selectedSatellite.value
+        })
+      })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log("this is the data");
+        console.log(data);
+        if (data.length > 0) {
+          const price = data[0]['price'];
+          const location = data[0]['location'];
+    
+          setSatelliteData({ price, location });
+        }
+    
+        //setrawSateliteResponse(data);
+      });
+    }
+  };
+  
+
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
+
+      <div className="flex flex-col items-center mt-10">
+
+        <label>Satellite Name  </label>
+        <Select
+        id = "satSelect"
+        options = {satellites}
+        value = {selectedSatellite}
+        onChange={handleSatelliteChange}        
+        />
+        <button onClick={handleSubmit} className="mt-3 px-4 py-2 bg-blue-500 text-green rounded-md">
+          Submit
+        </button>
+      </div>
+
+      <div>
+      <h1>My App</h1>
+      {satelliteData ? (
+        <>
+          <h2>Price: {satelliteData.price}</h2>
+          <h2>Location: {satelliteData.location}</h2>
+        </>
+      ) : (
+        <p>Loading satellite data...</p>
+      )}
+    </div>
+
+
       <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
         <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
           Get started by editing&nbsp;
