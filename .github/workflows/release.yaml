@@ -14,8 +14,7 @@ jobs:
         with:
           node-version: '16'
       - run: yarn install
-      # TODO: mongodb connection fails this
-      # - run: yarn build
+      - run: yarn build
       - run: yarn test
   deploy:
     name: Deploy app
