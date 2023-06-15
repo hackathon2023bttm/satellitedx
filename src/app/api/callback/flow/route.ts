@@ -20,7 +20,7 @@ if (process.env.NODE_ENV === 'development') {
   // { params } : { params: { id : string }}
 export async function GET(request: NextRequest) {
 
-    await dbConnect()
+  await dbConnect()
 
   const vsid = request.nextUrl.searchParams.get('verification_session_id')
   const resp = await fetch(apiUrl + '/api/verification_sessions/' + vsid)
