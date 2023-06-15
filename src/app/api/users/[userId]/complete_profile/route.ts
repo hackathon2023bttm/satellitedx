@@ -40,7 +40,7 @@ export async function POST(request: NextRequest, {params}: {params: { userId: st
 
     const reqData = {
       custom_data: 'sat-' + params.userId,
-      profiles: (json.profiles || []).map((p) => {
+      profiles: (json.profiles || []).map((p: any) => {
         return { type: p, requested: true }
       }),
       flow_redirect_url: baseUrl + '/api/callback/flow',
