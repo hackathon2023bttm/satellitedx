@@ -5,7 +5,7 @@ export default function Header() {
   const user = useUser()
   return (
     <nav className="px-4 flex w-full bg-teal-600 text-white">
-      <Link className="m-3" href="/">SatelliteDX</Link>
+      <Link className="m-3 font-bold" href="/">SatelliteDX</Link>
       <Link className="m-3" href="/satellites">Satellites</Link>
       <span className="m-3">|</span>
       {

@@ -117,23 +117,34 @@ export default function User2() {
     document.location = rUrl
   }
 
+  const Complete = (props) => {
+    if (props.complete) {
+      return (
+        <span className="font-bold px-2 py-1 rounded text-white bg-green-600">Complete</span>
+      )
+    } else {
+      return <span className="font-bold px-2 py-1 rounded text-white bg-amber-600">Incomplete</span>
+    }
+  }
+
   return (
     <>
       <script src="https://cdn.tailwindcss.com"></script>
       <Header />
       <div>
-        <div>
+        <div className="mx-6 my-2 opacity-20">
           UserID: { user && user._id }
         </div>
 
         {
           user && (
             <div className="m-6">
-              <div>Operation Profile: { JSON.stringify(user.operationProfileComplete) }</div>
+              <div className="my-2">Operation Profile: <Complete complete={user.operationProfileComplete} /> </div>
               <div>
-                <Button onClick={onClickComplete}>Complete Operation Profile</Button></div>
-              <div>Credit Profile: { JSON.stringify(user.creditProfileComplete) }</div>
-              <div>
+                <Button onClick={onClickComplete}>Complete Operation Profile</Button>
+              </div>
+              <div className="mt-6">Credit Profile: <Complete complete={user.creditProfileComplete} /> </div>
+              <div className="my-2">
                 <Button onClick={onClickCompleteCredit}>Complete Credit Profile</Button></div>
                 <div className="mt-4">
                 <Button onClick={onClickCompleteAll}>Complete All</Button>
