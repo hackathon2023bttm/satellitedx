@@ -37,7 +37,10 @@ export function parseCookies(req) {
 export function getTokenCookie(req) {
   // For API Routes we don't need to parse the cookies.
   if (req.cookies) {
-    return req.cookies.get(TOKEN_NAME).value
+    if (req.cookies.get(TOKEN_NAME)) {
+      return req.cookies.get(TOKEN_NAME).value;
+    }
+    // return req.cookies.get(TOKEN_NAME)
   }
   // For pages we do need to parse the cookies.
   const cookies = parseCookies(req)
