@@ -12,7 +12,7 @@ import Header from '../../app/components/Header'
 
 function SatelliteItem(props) {
   return (
-    <div>
+    <div className="m-4">
       <div className="text-6xl">🛰️</div>
       <div>Name: { props.satellite.name }</div>
       <div>Price: { props.satellite.price }</div>
@@ -25,13 +25,14 @@ export default function SatellitePage() {
     <>
       <script src="https://cdn.tailwindcss.com"></script>
       <Header />
-      {
+      <div className="mx-6 grid grid-cols-4 gap-4">{
         satelliteData.map((s) => {
           return (
             <SatelliteItem satellite={s} key={s.satelliteId} />
           )
         })
       }
+      </div>
     </>
   )
 }

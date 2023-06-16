@@ -24,6 +24,7 @@ export async function POST(request: NextRequest, {params}: {params: { userId: st
   await dbConnect()
 
   try {
+    console.log('completing profile')
     const user = await User.findById(params.userId)
     if (!user) {
       return NextResponse.json({ error: 'not_found'}, {status: 404})

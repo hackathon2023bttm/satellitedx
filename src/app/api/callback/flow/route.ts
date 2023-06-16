@@ -39,7 +39,7 @@ export async function GET(request: NextRequest) {
     }
   })
   await user.save()
-  redirect(baseUrl + '/user2/' + user._id)
+  redirect(baseUrl + '/profile')
 
   // res.redirect('')
 
