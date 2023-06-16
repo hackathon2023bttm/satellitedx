@@ -13,7 +13,7 @@ export async function GET(req) {
 
     const user = (maybeUserDoc && await User.findById(maybeUserDoc._id)) || null
 
-    console.log('authsession', user.toObject())
+    console.log('authsession', user && user.toObject())
 
     return NextResponse.json({ user })
   } catch (error) {
