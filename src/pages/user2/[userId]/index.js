@@ -28,7 +28,7 @@ export default function User2() {
       }),
       headers: { 'content-type': 'application/json' }
     })
-    const json = resp.json()
+    const json = await resp.json()
     console.log(json)
     const rUrl = json.verification_session_url
     document.location = rUrl

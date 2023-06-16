@@ -1,6 +1,10 @@
 import { Schema, model, models } from 'mongoose'
 
 const UserSchema = new Schema({
+  username: {
+    type: String,
+    unique: true,
+  },
   operationProfileComplete: {
     type: Boolean,
     default: false,
