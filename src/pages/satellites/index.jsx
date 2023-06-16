@@ -44,10 +44,10 @@ function SatelliteItem(props) {
       <div>Name: { props.satellite.name }</div>
       <div>Price: { props.satellite.price }</div>
       <div className="my-2">
-        <Button onClick={onBuy}>Buy at { props.satellite.price }</Button>
+        <Button disabled={!props.userId} className={props.userId ? ' ' : 'opacity-40'} onClick={onBuy}>Buy at { props.satellite.price }</Button>
       </div>
       <div className="my-2">
-        <Button onClick={onBuyNowPayLater}>Buy Now, Pay Later</Button>
+        <Button disabled={!props.userId} className={props.userId ? ' ' : 'opacity-40'} onClick={onBuyNowPayLater}>Buy Now, Pay Later</Button>
       </div>
     </div>
   )
