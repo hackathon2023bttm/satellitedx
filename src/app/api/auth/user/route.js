@@ -8,7 +8,7 @@ export async function GET(req) {
     await dbConnect()
 
     const session = await getLoginSession(req)
-    const maybeUserDoc = session._doc
+    const maybeUserDoc = session && session._doc
     console.log('auth user', maybeUserDoc)
 
     const user = (maybeUserDoc && await User.findById(maybeUserDoc._id)) || null
