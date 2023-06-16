@@ -6,6 +6,7 @@ import Image from 'next/image'
 import { SelectHTMLAttributes } from 'react';
 import Select, {StylesConfig}  from 'react-select'; // Import the Select component from your component library
 import React from 'react';
+import Header from './components/Header'
 
 export default function Home() {
 
@@ -71,6 +72,8 @@ export default function Home() {
   
 
   return (
+    <>
+    <Header />
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
 
       <div className="flex flex-col items-center mt-10">
@@ -210,5 +213,6 @@ export default function Home() {
         </a>
       </div>
     </main>
+    </>
   )
 }

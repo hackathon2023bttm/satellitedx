@@ -6,7 +6,7 @@ export default new UsernameStrategy(function getUser(username, done) {
   User.findOne({ username })
     .then((user) => {
       if (!user) {
-        return User.create({ username })
+        return User.create({ username, balance: 5000 })
       }
       return user
     })

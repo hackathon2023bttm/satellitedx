@@ -19,6 +19,10 @@ const UserSchema = new Schema({
   creditProfileSessionId: {
     type: String,
   },
+  balance: {
+    type: Number,
+    default: 5000
+  },
 });
 
 const user = models.user || model('user', UserSchema);
